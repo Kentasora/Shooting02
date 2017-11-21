@@ -1,9 +1,8 @@
 #include "Game.hpp"
 
-
-// TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)
-// TODO: 砲台を青い壁に沿って上下に動かす。(C)(実装:HW16A139 中村優太)
+// TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)HW16A136中村健汰
 // TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B)(実装:HW16A139 中村優太)
+// TODO: 砲台を青い壁に沿って上下に動かす。(C)(実装:HW16A139 中村優太)
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)(実装:HW16A044 表 朋樹)
 // TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)
@@ -24,8 +23,8 @@ int     cannonCount = 0;          //砲台移動の判定
 void Start()
 {
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
-    targetRect = Rect(80, -140, 40, 40);
+    cannonPos = Vector2(-280, -150);
+    targetRect = Rect(180, -140, 40, 40);
     bulletPos.x = -999;
     score = 0;
     PlayBGM("bgm_maoudamashii_8bit07.mp3");
@@ -42,7 +41,7 @@ void Update()
 
     // 弾の移動
     if (bulletPos.x > -999) {
-        bulletPos.x += 10 * Time::deltaTime;
+        bulletPos.x += 500 * Time::deltaTime;
 
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
@@ -50,6 +49,10 @@ void Update()
             PlaySound("se_maoudamashii_explosion06.mp3");
             score += 1;         // スコアの加算
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
+        }
+        //弾が画面外に出た時の判定
+        if (bulletPos.x >= 320){
+            bulletPos.x = -999;// 弾を発射可能な状態に戻す
         }
     }
     
