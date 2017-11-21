@@ -5,7 +5,7 @@
 // TODO: 砲台を青い壁に沿って上下に動かす。(C)(実装:HW16A139 中村優太)
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)(実装:HW16A044 表 朋樹)
-// TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)
+// TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)(実装:HW16A044 表 朋樹)
 // TODO: PlayBGM()関数を使って、BGMを再生する。(HW16A104　杉本　雅弥)
 // TODO: PlaySE()関数を使って、弾の発射時とターゲットに当たった時にSEを再生する。(HW16A104 杉本　雅弥)
 
@@ -47,7 +47,7 @@ void Update()
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
             PlaySound("se_maoudamashii_explosion06.mp3");
-            score += 1;         // スコアの加算
+            score += 100;         // スコアの加算
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
         }
         //弾が画面外に出た時の判定
@@ -97,7 +97,7 @@ void Update()
 
     // スコアの描画
     SetFont("nicoca_v1.ttf", 100.0f);
-    DrawText(FormatString("%02d", score), Vector2(-319, 149), Color::black);
-    DrawText(FormatString("%02d", score), Vector2(-320, 150), Color::white);
+    DrawText(FormatString("%05d", score), Vector2(-319, 149), Color::black);
+    DrawText(FormatString("%05d", score), Vector2(-320, 150), Color::white);
 }
 
