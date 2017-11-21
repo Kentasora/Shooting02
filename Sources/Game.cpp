@@ -1,7 +1,7 @@
 #include "Game.hpp"
 
 
-// TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)
+// TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)HW16A136中村健汰
 // TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B)
 // TODO: 砲台を青い壁に沿って上下に動かす。(C)
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
@@ -22,8 +22,8 @@ int     score;          //!< スコア
 void Start()
 {
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
-    targetRect = Rect(80, -140, 40, 40);
+    cannonPos = Vector2(-280, -150);
+    targetRect = Rect(180, -140, 40, 40);
     bulletPos.x = -999;
     score = 0;
 }
