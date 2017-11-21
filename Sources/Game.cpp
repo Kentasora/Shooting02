@@ -3,7 +3,7 @@
 
 // TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)
 // TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B)
-// TODO: 砲台を青い壁に沿って上下に動かす。(C)
+// TODO: 砲台を青い壁に沿って上下に動かす。(C)(実装:HW16A139 中村優太)
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)
 // TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)
@@ -16,6 +16,8 @@ Vector2 cannonPos;      //!< 砲台の位置
 Vector2 bulletPos;      //!< 弾の位置
 Rect    targetRect;     //!< ターゲットの矩形
 int     score;          //!< スコア
+
+int     cannonCount = 0;          //砲台移動の判定
 
 
 // ゲーム開始時に呼ばれる関数です。
@@ -63,6 +65,20 @@ void Update()
     // 砲台の描画
     FillRect(Rect(cannonPos.x-10, -140, 20, 100), Color::blue);
     DrawImage("cannon.png", cannonPos);
+    
+    //砲台の移動
+    if (cannonPos.y >= -60 ) {
+        cannonCount = 1;
+    }
+    if (cannonPos.y <= -150) {
+        cannonCount = 0;
+    }
+    if (cannonCount == 0) {
+        cannonPos.y += 1;
+    }
+    if (cannonCount == 1) {
+        cannonPos.y -= 1;
+    }
 
     // ターゲットの描画
     FillRect(targetRect, Color::red);
